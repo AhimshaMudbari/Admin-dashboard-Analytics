@@ -1,7 +1,30 @@
 import React from 'react';
+import {
+  KanbanComponent,
+  ColumnDirective,
+  ColumnsDirective,
+} from '@syncfusion/ej2-react-kanban';
+import { kanbanData, kanbanGrid } from '../data/dummy';
+import { Header } from '../components';
 
 const Kanban = () => {
-  return <div>Kanban</div>;
+  return (
+    <div className="p-2 m-2 mt-24 bg-white md:m-10 md:p-10 rounded-3xl">
+      <Header category="Apps" title="Kanban" />
+      <KanbanComponent
+        id="kanban-data"
+        dataSource={kanbanData}
+        cardSettings={{ contentField: 'Summary', headerField: 'Id' }}
+        keyField="Status"
+      >
+        <ColumnsDirective>
+          {kanbanGrid.map((item, index) => (
+            <ColumnDirective key={index} {...item} />
+          ))}
+        </ColumnsDirective>
+      </KanbanComponent>
+    </div>
+  );
 };
 
 export default Kanban;
