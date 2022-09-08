@@ -7,6 +7,8 @@ import { useStateContext } from '../contexts/contextProvider';
 import { rgbToHex } from '@syncfusion/ej2/treemap';
 
 const ThemeSettings = () => {
+  const { setColor, setMode, currentMode, currentColor, setThemeSettings } =
+    useStateContext();
   return (
     <div className="fixed top-0 right-0 w-screen bg-half-transparent nav-item">
       <div className="float-right h-screen dark:text-gray-200 bg-white dark:[#484B52] w-400">
@@ -14,7 +16,7 @@ const ThemeSettings = () => {
           <p className="text-xl font-semibold">Settings</p>
           <button
             type="button"
-            onClick={() => {}}
+            onClick={() => setThemeSettings(false)}
             style={{ color: 'rgb(153,171,180)', borderRadius: '50%' }}
             className="p-3 text-2xl hover:drop-shadow-xl hover:bg-light-gray"
           >
@@ -30,8 +32,8 @@ const ThemeSettings = () => {
               name="theme"
               value="Light"
               className="cursor-pointer"
-              onChange={() => {}}
-              checked={true}
+              onChange={setMode}
+              checked={currentMode === 'Light'}
             />
             <label htmlFor="light" className="ml-2 cursor-pointer text-md">
               Light
@@ -44,8 +46,8 @@ const ThemeSettings = () => {
               name="theme"
               value="Dark"
               className="cursor-pointer"
-              onChange={() => {}}
-              checked={true}
+              onChange={setMode}
+              checked={currentMode === 'Dark'}
             />
             <label htmlFor="dark" className="ml-2 cursor-pointer text-md">
               Dark
@@ -66,11 +68,12 @@ const ThemeSettings = () => {
                     type="button"
                     className="w-10 h-10 rounded-full cursor-pointer"
                     style={{ backgroundColor: i.color }}
-                    onClick={() => {}}
+                    onClick={() => setColor(i.color)}
                   >
                     <BsCheck
                       className={`ml-2 text-2xl text-white ${
-                        true ? 'block' : 'hidden'
+                        i.color === currentColor
+                      } ? 'block' : 'hidden'
                       }`}
                     />
                   </button>
