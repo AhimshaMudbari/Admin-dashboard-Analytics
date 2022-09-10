@@ -67,13 +67,16 @@ const ThemeSettings = () => {
                   <button
                     type="button"
                     className="w-10 h-10 rounded-full cursor-pointer"
-                    style={{ backgroundColor: i.color }}
-                    onClick={() => setColor(i.color)}
+                    style={{ backgroundColor: `${i.color}` }}
+                    onClick={() => {
+                      console.log(i.color);
+                      setColor(`${i.color}`);
+                    }}
                   >
                     <BsCheck
                       className={`ml-2 text-2xl text-white ${
-                        i.color === currentColor
-                      } ? 'block' : 'hidden'
+                        i.color === currentColor ? 'block' : 'hidden'
+                      }
                       }`}
                     />
                   </button>
